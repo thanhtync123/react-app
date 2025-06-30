@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       {/* Sử dụng component HelloUser và truyền prop name */}
-      <HelloUser name="Minh" />
+      <HelloUser name="Thành Tỏi Gaming" />
     </div>
   );
 }
