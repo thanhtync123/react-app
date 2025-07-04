@@ -16,8 +16,19 @@ import UserCard from "./component/UserCard";
 import Alertbox from "./component/Alertbox";
 import PriceTag from "./component/PriceTag";
 import Grid from "./component/Grid";
+import TodoCard from "./component/TodoCard";
+
+
 
 function App() {
+  type Todo = {
+  id: number;
+  name: string;
+  state: string;
+  description: string;
+};
+const [newName, setNewName] = useState('');
+const [newDesc, setNewDesc] = useState('');
  const products = [
    { id: 1, name: 'iPhone 15', price: 999, description: 'Nội địa' },
   { id: 2, name: 'MacBook Air', price: 1299, description: 'Chánh hãng' },
@@ -30,6 +41,21 @@ function App() {
   { id: 9, name: 'Apple TV 4K', price: 129, description: 'Giải trí tại gia' },
   { id: 10, name: 'HomePod Mini', price: 99, description: 'Loa thông minh nhỏ gọn' },
 ];
+const sampleTodos = [
+  { id: 1, name: 'Mở mắt', state: 'pending', description: 'Dậy đúng giờ' },
+  { id: 2, name: 'Đánh răng', state: 'completed', description: 'Giữ răng sạch' },
+  { id: 3, name: 'Tập thể dục', state: 'pending', description: '30 phút buổi sáng' },
+  { id: 4, name: 'Ăn sáng', state: 'completed', description: 'Trứng + sữa' },
+  { id: 5, name: 'Làm bài tập', state: 'pending', description: 'React Todo App' },
+  { id: 6, name: 'Học tiếng Anh', state: 'completed', description: 'Từ vựng mới' },
+  { id: 7, name: 'Code dự án', state: 'pending', description: 'Todo + StateTag' },
+  { id: 8, name: 'Đọc sách', state: 'completed', description: '20 trang sách lập trình' },
+  { id: 9, name: 'Đi chợ', state: 'pending', description: 'Mua rau, cá, thịt' },
+  { id: 10, name: 'Ngủ sớm', state: 'pending', description: 'Trước 11 giờ đêm' },
+];
+
+
+
 const users = 
   [
   { id: 'NV01', name: 'Dương Ngọc Nhân', email: 'nhandn@gmail.com' },
@@ -40,6 +66,7 @@ const users =
   const [count, setCount] = useState<number>(0);
   const [count2, setCount2] = useState<number>(0);
   const [text,setText] = useState("");
+  const [todos, setTodos] = useState<Todo[]>(sampleTodos);
   const HandleClickB1 = () => {
     setCount
   };
@@ -54,6 +81,19 @@ const users =
   {
     alert("chao")
   };
+  const HandleAddToDo = () => 
+  {
+    if(newName.trim()==='') return;
+    const newTodo = {
+      id:todos.length+1,
+      name: newName,
+      state: 'pending',
+      description: newDesc
+    };
+    setTodos([...todos,newTodo])
+      setNewName('');
+  setNewDesc('');
+  }
   return (
   <> 
     <p>Bài 1 </p> 
@@ -137,6 +177,29 @@ const users =
       <Grid>  {products.map(prod => (
     <ProductCard key={prod.id} product={prod} />
   ))}</Grid>
+  
+  <span>Tên công việc:   </span>
+  <input type="text" className="border border-gray-800 p-2" value={newName} 
+  onChange={e => setNewName (e.target.value)}
+  />  
+  <span>                   </span>
+  <span>Mô tả:   </span>
+<textarea
+  className="border border-gray-800 p-2"
+  rows={3}
+  placeholder="Nhập mô tả..."
+  value={newDesc}
+  onChange={e => setNewDesc(e.target.value)}
+/>
+    <span>                   </span>
+  <button className="border border-gray-800 p-2" onClick={HandleAddToDo}>Thêm</button>
+  <div className='grid grid-cols-5'>
+      {todos.map(item => (
+        <TodoCard key={item.id} todo={item}/>
+      ))}
+  </div>
+
+
   </>
   );
 }
