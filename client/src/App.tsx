@@ -17,6 +17,9 @@ import Alertbox from "./component/Alertbox";
 import PriceTag from "./component/PriceTag";
 import Grid from "./component/Grid";
 import TodoCard from "./component/TodoCard";
+import StudentForm from "./component/StudentForm";
+import ModalToastDemo from "./component/ModalToastDemo";
+import Day9 from "./component/Day9";
 
 
 
@@ -62,6 +65,13 @@ const users =
   { id: 'NV02', name: 'Dương Quá', email: 'quad@gmail.com' },
   { id: 'NV03', name: 'Trương Vô Kỵ', email: 'voky@gmail.com' },
   { id: 'NV04', name: 'Tiểu Long Nữ', email: 'longnu@gmail.com' },
+  ]
+  const students = 
+  [
+  { id: 'HS01', name: 'Dương Ngọc Nhân', age: 15 },
+  { id: 'HS02', name: 'Dương Quá', age: 15 },
+  { id: 'HS03', name: 'Trương Vô Kỵ', age: 15 },
+  { id: 'HS04', name: 'Tiểu Long Nữ', age: 15 },
   ]
   const [count, setCount] = useState<number>(0);
   const [count2, setCount2] = useState<number>(0);
@@ -198,8 +208,38 @@ const users =
         <TodoCard key={item.id} todo={item}/>
       ))}
   </div>
-
-
+  <StudentForm/>
+  Ngày 6 - Tailwind responve cơ bản
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <Card/>
+     <Card/>
+      <Card/>
+    Ngày 7 - Table + Action
+    <table className="table-auto w-full">
+      <thead>
+          <tr>
+            <th>Tên </th>
+            <th>Tuổi</th>
+            <th>Thao tác</th>
+          </tr>
+      </thead>
+      <tbody>
+          {students.map((s)=>(
+            <tr key={s.id}>
+              <td>{s.name}</td>
+              <td>{s.age}</td>
+              <td>
+              <button>Xóa</button>
+              <button>Sửa</button>
+              </td>
+               
+            </tr>
+          ))}
+      </tbody>
+    </table>
+  </div>
+          <ModalToastDemo/>
+          <Day9/>
   </>
   );
 }
